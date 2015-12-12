@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Arrays;
 class Dictionary
 {
@@ -11,8 +12,10 @@ class Dictionary
         try
         {
             ArrayList<String> temp = new ArrayList<String>();
-            File file = new File("ospd.txt");
-            Scanner scanner = new Scanner(file);
+            //File file = new File("src/ospd.txt");
+            URL url = this.getClass().getResource("ospd.txt");
+            //File file = new File(url.getFile());
+            Scanner scanner = new Scanner(url.openStream());
             //System.out.println(file.getName());
             while (scanner.hasNextLine())
             {
