@@ -1,4 +1,3 @@
-/JavaApplication11/nbproject/private/
-/Scrabble/nbproject/private/
-/Scrabble/build/
-/Scrabble/dist/
+dist/
+build/
+nbproject/
