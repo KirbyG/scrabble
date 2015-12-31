@@ -1,5 +1,12 @@
+/**
+ * The "bag" that contains all unplayed tiles
+ * @author Kirby Gordon
+ */
 class Bag extends TileCollection
 {
+    /**
+     * Constructs a bag with the correct distribution of 100 letters.
+     */
     public Bag()
     {
         super();

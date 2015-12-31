@@ -2,6 +2,10 @@ import java.awt.Color;
 import java.util.List;
 import java.util.Arrays;
 import java.awt.Font;
+/**
+ * Publicly accessible constants defining the appearance of the game.
+ * @author Kirby Gordon
+ */
 public final class Constants
 {
     public static final Font SCOREFONT = new Font("Roman", Font.BOLD, 50);
@@ -38,6 +42,12 @@ public final class Constants
     public static final List<Position> DWS = Arrays.asList(DWSTEMP);
     private static final Position[] TWSTEMP = {new Position(0, 0), new Position(7, 0), new Position(14, 0), new Position(0, 7), new Position(14, 7), new Position(0, 14), new Position(7, 14), new Position(14, 14)};
     public static final List<Position> TWS = Arrays.asList(TWSTEMP);
+    /**
+     * Generates a random integer in the given range.
+     * @param min the inclusive minimum of the range
+     * @param max the inclusive maximum of the range
+     * @return the random integer
+     */
     public static int random(int min, int max)
     {
         return (int)(Math.random()*(max - min + 1) + min);

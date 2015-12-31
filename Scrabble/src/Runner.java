@@ -1,6 +1,10 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
+/**
+ * Class that runs the actual program.
+ * @author Kirby Gordon
+ */
 class Runner
 {
     private static Data data = new Data();
@@ -14,6 +18,11 @@ class Runner
     private static ArrayList<Word> words = new ArrayList<Word>();
     private static int score = 0;
     private static int or = 0;
+    /**
+     * Main method that runs the game.
+     * @param args
+     * @throws InterruptedException 
+     */
     public static void main(String[] args) throws InterruptedException
     {
         output.redraw(data);
@@ -61,10 +70,18 @@ class Runner
             }
         }
     }
+    /**
+     * Checks whether a play is allowed.
+     * @return true or false
+     */
     private static boolean legalPlay()
     {
         return input.getEnter() && placement() && valid();
     }
+    /**
+     * Determines if the placement of tiles is allowed.
+     * @return true or false
+     */
     private static boolean placement()
     {
         if (data.getLimbo().getNumTiles() == 0)
@@ -77,6 +94,10 @@ class Runner
         }
         return contiguous();
     }
+    /**
+     * Checks if a word is valid.
+     * @return true or false
+     */
     private static boolean valid()
     {
         words.clear();
@@ -99,11 +120,17 @@ class Runner
         }
         return false;
     }
+    /**
+     * Fills in the words played.
+     */
     private static void fillWords()
     {
         mainWord();
         crosswords();
     }
+    /**
+     * Builds the crosswords of the played word.
+     */
     private static void crosswords()
     {
         for (int i = 0; i < data.getLimbo().getNumTiles(); i++)
@@ -111,10 +138,18 @@ class Runner
             buildWord(data.getLimbo().getTile(i).getBoardPosition(), or);
         }
     }
+    /**
+     * Builds the main word played.
+     */
     private static void mainWord()
     {
         buildWord(data.getLimbo().getTile(0).getBoardPosition(), 1 - or);
     }
+    /**
+     * Builds a word at a position.
+     * @param p the position of the word
+     * @param which direction of the word
+     */
     private static void buildWord(Position p, int which)
     {
         Word w = new Word();
@@ -136,6 +171,12 @@ class Runner
             words.add(w);
         }
     }
+    /**
+     * Moves along the word in the x or y direction
+     * @param p the start position
+     * @param which the x or y direction
+     * @param inc how far to move
+     */
     private static void incposxory(Position p, int which, int inc)
     {
         if (which == 0)
@@ -147,6 +188,10 @@ class Runner
             p.setY(p.getY() + inc);
         }
     }
+    /**
+     * Makes sure the first move is played on the start square
+     * @return true or false
+     */
     private static boolean onStart()
     {
         for (int i = 0; i < data.getLimbo().getNumTiles(); i++)
@@ -158,14 +203,27 @@ class Runner
         }
         return false;
     }
+    /**
+     * Determines whether or not the word is contiguous
+     * @return true or false
+     */
     private static boolean contiguous()
     {
         return onALine() && noGaps();
     }
+    /**
+     * Makes sure the word is all on the same line.
+     * @return true or false
+     */
     private static boolean onALine()
     {
         return checkAxis(0) || checkAxis(1);
     }
+    /**
+     * Checks along an axis given the direction to go
+     * @param which direction to go
+     * @return true or false
+     */
     private static boolean checkAxis(int which)
     {
         if (data.getLimbo().getNumTiles() == 1)
@@ -182,6 +240,10 @@ class Runner
         or = which;
         return true;
     }
+    /**
+     * Checks to see if the word has gaps in it
+     * @return true or false
+     */
     private static boolean noGaps()
     {
         ArrayList<Integer> vals = new ArrayList<Integer>();
@@ -227,6 +289,10 @@ class Runner
         }
         return true;
     }
+    /**
+     * Lets a player make a move.
+     * @throws InterruptedException 
+     */
     private static void doMove() throws InterruptedException
     {
         score = 0;
@@ -256,6 +322,11 @@ class Runner
         data.nextTurn();
         output.redraw(data);
     }
+    /**
+     * Checks if the mouse is on a tile.
+     * @return which tile the mouse is on
+     * @throws InterruptedException 
+     */
     private static int onTile() throws InterruptedException
     {
         int rackSize = data.getPRack().getNumTiles();
@@ -279,6 +350,11 @@ class Runner
         }
         return 0;
     }
+    /**
+     * Checks if a tile to be placed overlaps an already played tile
+     * @param t the position of the tile
+     * @return true or false
+     */
     private static boolean overlap(Position t)
     {
         for (int i = 0; i < data.getLimbo().getNumTiles() - 1; i++)
@@ -294,6 +370,10 @@ class Runner
         }
         return false;
     }
+    /**
+     * Gets the position on the grid
+     * @return grid position
+     */
     private static Position getGrid()
     {
         Position m = new Position(input.getMousePosition().getX(), input.getMousePosition().getY());
@@ -319,6 +399,12 @@ class Runner
         }
         return null;
     }
+    /**
+     * Checks that the position is within a tile
+     * @param t position
+     * @return true or false
+     * @throws InterruptedException 
+     */
     public static boolean checkPos(Position t) throws InterruptedException
     {
         Thread.sleep(0);

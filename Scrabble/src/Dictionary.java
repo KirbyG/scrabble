@@ -4,9 +4,16 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
+/**
+ * Contains and looks up all valid Scrabble words.
+ * @author Kirby Gordon
+ */
 class Dictionary
 {
     private String[] words;
+    /**
+     * Constructs a new dictionary by loading words from a text file.
+     */
     public Dictionary()
     {
         try
@@ -25,6 +32,11 @@ class Dictionary
         }
         catch (IOException e) {System.out.println(e.getMessage());}
     }
+    /**
+     * Looks up the given word in the dictionary.
+     * @param word the String to be searched
+     * @return true if found, false if not
+     */
     public boolean lookUp(String word)
     {
         if (Arrays.binarySearch(words, word) < 0)
